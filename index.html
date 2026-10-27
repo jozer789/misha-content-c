@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Миша Соколов — контент и соцсети под ключ</title>
+<meta name="description" content="Съёмка видео, ведение соцсетей и чужих аккаунтов для небольших проектов. Один клиент за раз.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --primary:#e11d48;
+    --on-primary:#ffffff;
+    --secondary:#fb7185;
+    --accent:#2563eb;
+    --bg:#fff1f2;
+    --fg:#881337;
+    --card:#ffffff;
+    --muted:#f0ecf2;
+    --muted-fg:#475569;
+    --border:#fecdd3;
+    --ink:#1c1014;
+    --radius:20px;
+    --shadow:0 18px 40px -24px rgba(136,19,55,.45);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Inter",system-ui,sans-serif;font-size:16px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;text-wrap:pretty;
+  }
+  img,svg{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit}
+  :focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
+  ::selection{background:var(--primary);color:#fff}
+
+  .wrap{width:100%;max-width:1160px;margin:0 auto;padding:0 20px}
+  @media(min-width:768px){.wrap{padding:0 40px}}
+
+  /* header */
+  .nav{
+    position:sticky;top:0;z-index:40;
+    background:rgba(255,241,242,.86);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:72px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.01em;font-size:16px}
+  .brand .dotmark{
+    width:26px;height:26px;border-radius:9px;background:var(--primary);
+    display:grid;place-items:center;color:#fff;font-family:"Playfair Display",serif;font-size:15px;font-style:italic;
+  }
+  .navlinks{display:none}
+  @media(min-width:900px){.navlinks{display:flex;gap:26px;font-size:14px;color:var(--muted-fg)}}
+  .navlinks a{padding:8px 0;transition:color .2s}
+  .navlinks a:hover{color:var(--primary)}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;
+    min-height:48px;padding:0 22px;border-radius:999px;border:1px solid transparent;
+    font-size:15px;font-weight:600;letter-spacing:-.01em;cursor:pointer;
+    transition:transform .2s ease,background .2s ease,box-shadow .2s ease,color .2s ease,border-color .2s ease;
+  }
+  .btn-primary{background:var(--primary);color:#fff;box-shadow:0 10px 24px -14px rgba(225,29,72,.8)}
+  .btn-primary:hover{background:#be123c;transform:translateY(-2px)}
+  .btn-ghost{background:#fff;color:var(--fg);border-color:var(--border)}
+  .btn-ghost:hover{border-color:var(--primary);transform:translateY(-2px)}
+  .nav .btn{min-height:44px;padding:0 18px;font-size:14px}
+
+  /* hero */
+  .hero{padding:48px 0 0}
+  @media(min-width:900px){.hero{padding:72px 0 0}}
+  .hero-grid{display:grid;gap:36px;align-items:center}
+  @media(min-width:900px){.hero-grid{grid-template-columns:1.05fr .95fr;gap:56px}}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:9px;padding:7px 14px;border-radius:999px;
+    background:#fff;border:1px solid var(--border);color:var(--fg);
+    font-size:13px;font-weight:500;margin:0 0 24px;
+  }
+  .eyebrow .pulse{width:7px;height:7px;border-radius:50%;background:var(--primary);box-shadow:0 0 0 4px rgba(225,29,72,.14)}
+  h1{
+    font-family:"Playfair Display",Georgia,serif;font-weight:600;
+    font-size:clamp(40px,7.2vw,84px);line-height:1.02;letter-spacing:-.03em;margin:0;
+  }
+  h1 em{font-style:italic;color:var(--primary)}
+  .lede{margin:24px 0 0;font-size:18px;line-height:1.55;color:var(--muted-fg);max-width:46ch}
+  .lede b{color:var(--ink);font-weight:600}
+  .ctaRow{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+  .ctaRow .btn{min-height:54px;padding:0 26px}
+
+  /* side card */
+  .board{
+    position:relative;background:#fff;border:1px solid var(--border);border-radius:28px;
+    padding:18px;box-shadow:var(--shadow);
+  }
+  .board .topline{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--muted-fg);margin-bottom:14px;letter-spacing:.02em}
+  .board .topline b{color:var(--ink);font-weight:600}
+  .tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .tile{
+    border-radius:16px;padding:16px;min-height:112px;display:flex;flex-direction:column;justify-content:space-between;
+    transition:transform .25s ease;
+  }
+  .tile:hover{transform:translateY(-3px)}
+  .tile .ic{width:22px;height:22px;color:currentColor}
+  .tile .lbl{font-size:13px;font-weight:600;line-height:1.3}
+  .t-rose{background:var(--primary);color:#fff}
+  .t-cream{background:#fff1f2;color:var(--fg);border:1px solid var(--border)}
+  .t-ink{background:#1c1014;color:#fff}
+  .t-blue{background:#eaf0ff;color:#1e3a8a;border:1px solid #c7d7ff}
+  .board .foot{
+    display:flex;align-items:center;gap:10px;margin-top:14px;padding-top:14px;border-top:1px dashed var(--border);
+    font-size:12px;color:var(--muted-fg);
+  }
+  .avstack{display:flex}
+  .avstack span{
+    width:22px;height:22px;border-radius:50%;border:2px solid #fff;margin-left:-7px;
+    background:linear-gradient(135deg,var(--secondary),var(--primary));
+  }
+  .avstack span:first-child{margin-left:0}
+
+  /* marquee strip */
+  .strip{
+    margin-top:56px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+    background:#fff;overflow:hidden;padding:16px 0;
+  }
+  .strip .row{display:flex;width:max-content;gap:0;will-change:transform}
+  .strip .row span{
+    font-family:"Playfair Display",serif;font-style:italic;font-size:clamp(18px,2.6vw,26px);
+    color:var(--fg);padding-right:22px;white-space:nowrap;
+  }
+  .strip .row span i{font-style:normal;color:var(--secondary);padding-right:22px}
+
+  /* sections */
+  section{padding:76px 0 0}
+  .kicker{
+    display:flex;align-items:center;gap:12px;margin:0 0 14px;
+    font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--primary);
+  }
+  .kicker::before{content:"";width:26px;height:2px;background:var(--primary)}
+  h2{
+    font-family:"Playfair Display",Georgia,serif;font-weight:600;
+    font-size:clamp(28px,4.4vw,46px);line-height:1.08;letter-spacing:-.025em;margin:0;
+    max-width:24ch;
+  }
+  .sub{margin:16px 0 0;color:var(--muted-fg);max-width:54ch;font-size:17px}
+
+  .blocks{display:grid;gap:16px;margin-top:38px}
+  @media(min-width:700px){.blocks{grid-template-columns:1fr 1fr}}
+  .block{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:26px;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;
+  }
+  .block:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--secondary)}
+  .block .num{font-size:12px;font-weight:600;color:var(--secondary);letter-spacing:.12em}
+  .block h3{
+    font-family:"Playfair Display",Georgia,serif;font-weight:600;font-size:24px;
+    letter-spacing:-.01em;margin:12px 0 8px;
+  }
+  .block p{margin:0;color:var(--muted-fg);font-size:15.5px}
+  .block.hi{background:var(--primary);border-color:var(--primary);color:#fff}
+  .block.hi .num{color:#fecdd3}
+  .block.hi p{color:#ffe4e8}
+
+  /* month */
+  .month{
+    margin-top:38px;background:#fff;border:1px solid var(--border);border-radius:24px;padding:22px;
+  }
+  @media(min-width:760px){.month{padding:30px}}
+  .weeks{display:grid;gap:10px}
+  @media(min-width:760px){.weeks{grid-template-columns:repeat(4,1fr);gap:14px}}
+  .week{
+    border:1px solid var(--border);border-radius:14px;padding:16px;background:#fffafa;
+    transition:background .25s ease,border-color .25s ease;
+  }
+  .week:hover{background:#fff;border-color:var(--secondary)}
+  .week .w{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--secondary)}
+  .week .t{font-weight:600;margin:8px 0 6px;font-size:15px}
+  .week p{margin:0;font-size:14px;color:var(--muted-fg)}
+  .month .note{margin:20px 0 0;font-size:14px;color:var(--muted-fg)}
+
+  /* steps */
+  .steps{display:grid;gap:16px;margin-top:38px}
+  @media(min-width:760px){.steps{grid-template-columns:repeat(3,1fr)}}
+  .step{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px}
+  .step .big{
+    font-family:"Playfair Display",serif;font-style:italic;font-size:34px;color:var(--secondary);line-height:1;
+  }
+  .step h3{font-size:18px;font-weight:600;margin:14px 0 8px;letter-spacing:-.01em}
+  .step p{margin:0;color:var(--muted-fg);font-size:15px}
+
+  /* cta */
+  .final{
+    margin-top:84px;background:var(--primary);color:#fff;border-radius:28px;
+    padding:40px 24px;position:relative;overflow:hidden;
+  }
+  @media(min-width:760px){.final{padding:64px 56px}}
+  .final::after{
+    content:"";position:absolute;right:-80px;top:-80px;width:280px;height:280px;border-radius:50%;
+    background:rgba(255,255,255,.08);
+  }
+  .final .k{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#ffd7de;margin:0 0 16px;position:relative}
+  .final h2{
+    font-family:"Playfair Display",serif;font-weight:600;font-size:clamp(30px,4.6vw,52px);
+    line-height:1.05;letter-spacing:-.03em;margin:0;color:#fff;max-width:22ch;position:relative;
+  }
+  .final h2 em{font-style:italic;color:#ffe4e8}
+  .final p{margin:18px 0 28px;color:#ffe4e8;max-width:44ch;position:relative}
+  .final .btn{background:#fff;color:var(--fg);position:relative}
+  .final .btn:hover{background:#fff1f2;transform:translateY(-2px)}
+  .final .small{margin:16px 0 0;font-size:13px;color:#ffd7de;position:relative}
+
+  footer{
+    display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+    padding:34px 0 48px;font-size:13px;color:var(--muted-fg);
+  }
+
+  .rv,.block,.step,.week{opacity:0;transform:translateY(18px) scale(.99)}
+  .rv.in,.block.in,.step.in,.week.in{opacity:1;transform:none;transition:opacity .55s cubic-bezier(.2,.7,.2,1),transform .55s cubic-bezier(.2,.7,.2,1)}
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .rv,.block,.step,.week{opacity:1;transform:none}
+    .rv.in,.block.in,.step.in,.week.in{transition:none}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="dotmark">М</span>Миша Соколов</a>
+    <nav class="navlinks">
+      <a href="#work">Услуги</a>
+      <a href="#month">Как идёт месяц</a>
+      <a href="#how">Процесс</a>
+      <a href="#contact">Контакты</a>
+    </nav>
+    <a class="btn btn-primary" href="#contact">Обсудить проект</a>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap hero">
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow"><span class="pulse"></span>свободен один слот на ноябрь</p>
+        <h1>Веду ваши соцсети так, будто это <em>мой бизнес</em>.</h1>
+        <p class="lede">Снимаю видео, пишу тексты и веду чужие аккаунты. <b>Один проект за раз</b>, чтобы не сдавать работу по остаточному принципу.</p>
+        <div class="ctaRow">
+          <a class="btn btn-primary" href="#contact">Написать мне</a>
+          <a class="btn btn-ghost" href="#work">Что входит</a>
+        </div>
+      </div>
+
+      <div class="board" aria-hidden="true">
+        <div class="topline"><span><b>Неделя 3</b> · план</span><span>4 съёмки · 12 публикаций</span></div>
+        <div class="tiles">
+          <div class="tile t-rose">
+            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="14" height="12" rx="2.5"/><path d="M16 10.5l5-3v9l-5-3z"/></svg>
+            <span class="lbl">Съёмка и монтаж</span>
+          </div>
+          <div class="tile t-cream">
+            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16M4 12h11M4 19h7"/></svg>
+            <span class="lbl">Тексты и подписи</span>
+          </div>
+          <div class="tile t-ink">
+            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2.5"/><path d="M8 2.5V6M16 2.5V6M3 10h18"/></svg>
+            <span class="lbl">Расписание публикаций</span>
+          </div>
+          <div class="tile t-blue">
+            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <span class="lbl">Ответы в комментариях</span>
+          </div>
+        </div>
+        <div class="foot">
+          <span class="avstack"><span></span><span></span><span></span></span>
+          Доступы и рутина на мне
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="strip" aria-hidden="true">
+    <div class="row" id="strip">
+      <span>видео<i>/</i></span><span>соцсети<i>/</i></span><span>чужие аккаунты<i>/</i></span><span>консультации<i>/</i></span>
+      <span>видео<i>/</i></span><span>соцсети<i>/</i></span><span>чужие аккаунты<i>/</i></span><span>консультации<i>/</i></span>
+      <span>видео<i>/</i></span><span>соцсети<i>/</i></span><span>чужие аккаунты<i>/</i></span><span>консультации<i>/</i></span>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <section id="work">
+      <p class="kicker">услуги</p>
+      <h2>Четыре вещи, которые забираю у вас с плеч</h2>
+      <p class="sub">Можно взять всё вместе, можно только то, что горит.</p>
+      <div class="blocks">
+        <article class="block hi">
+          <span class="num">01</span>
+          <h3>Видео</h3>
+          <p>Раскадровка, съёмка, монтаж, титры. Отдаю готовый файл под вертикаль и под горизонталь.</p>
+        </article>
+        <article class="block">
+          <span class="num">02</span>
+          <h3>Соцсети</h3>
+          <p>План на месяц, тексты, публикации, ответы в комментариях. Один канал или сразу несколько.</p>
+        </article>
+        <article class="block">
+          <span class="num">03</span>
+          <h3>Чужие аккаунты</h3>
+          <p>Беру доступы, держу расписание и рутину. Публикую от вашего имени, согласуя только спорное.</p>
+        </article>
+        <article class="block">
+          <span class="num">04</span>
+          <h3>Консультации</h3>
+          <p>Разбор того, что уже есть: почему не читают, что убрать, с чего начать заново.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="month">
+      <p class="kicker">как идёт месяц</p>
+      <h2>Четыре съёмочных дня закрывают весь месяц</h2>
+      <div class="month">
+        <div class="weeks">
+          <div class="week">
+            <span class="w">неделя 1</span>
+            <p class="t">План и съёмка</p>
+            <p>Согласуем темы, пишем раскадровку, снимаем пакет роликов.</p>
+          </div>
+          <div class="week">
+            <span class="w">неделя 2</span>
+            <p class="t">Монтаж и тексты</p>
+            <p>Собираю видео, пишу подписи, готовлю публикации по датам.</p>
+          </div>
+          <div class="week">
+            <span class="w">неделя 3</span>
+            <p class="t">Публикации и ответы</p>
+            <p>Выходит контент, отвечаю в комментариях и сообщениях.</p>
+          </div>
+          <div class="week">
+            <span class="w">неделя 4</span>
+            <p class="t">Отчёт и досъёмка</p>
+            <p>Смотрю, что читали, и снимаем то, чего не хватило.</p>
+          </div>
+        </div>
+        <p class="note">Ритм ровный: без недель тишины и паники в последний день месяца.</p>
+      </div>
+    </section>
+
+    <section id="how">
+      <p class="kicker">процесс</p>
+      <h2>Три шага до первой публикации</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="big">01</div>
+          <h3>Разговор на двадцать минут</h3>
+          <p>Что за проект, что уже пробовали, чего не хватает. Без презентаций на сорок слайдов.</p>
+        </div>
+        <div class="step">
+          <div class="big">02</div>
+          <h3>План на месяц</h3>
+          <p>Темы, форматы, даты. Согласуем до первой съёмки, чтобы не спорить в день публикации.</p>
+        </div>
+        <div class="step">
+          <div class="big">03</div>
+          <h3>Съёмка и публикации</h3>
+          <p>Дальше сам. Раз в неделю короткий отчёт: что вышло, что читали, что меняем.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="final" id="contact">
+      <p class="k">свободен один слот</p>
+      <h2>Расскажите про проект, и я скажу <em>честно</em>, нужен ли вам человек на контент</h2>
+      <p>Хватит двух абзацев: что за дело и что уже пробовали. Отвечу в тот же день.</p>
+      <a class="btn" href="#contact" id="ctaBtn">Написать мне</a>
+      <p class="small">Ссылку на телеграм или почту подставим здесь перед публикацией.</p>
+    </div>
+
+    <footer>
+      <span>© 2026 Миша Соколов · контент и соцсети</span>
+      <span>Сделано вместе с Hermes</span>
+    </footer>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var items = document.querySelectorAll('.rv, .block, .step, .week');
+
+  if('IntersectionObserver' in window && !reduce){
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(!e.isIntersecting) return;
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      });
+    },{threshold:.12, rootMargin:'0px 0px -6% 0px'});
+    items.forEach(function(el){ io.observe(el); });
+    setTimeout(function(){ items.forEach(function(el){ el.classList.add('in'); }); }, 2200);
+  } else {
+    items.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  if(typeof gsap !== 'undefined' && !reduce){
+    gsap.from('.tile', { opacity: 0, y: 14, scale: .96, duration: .45, stagger: {each:.07, from:'start'}, ease:'back.out(1.4)', delay:.2 });
+    var strip = document.getElementById('strip');
+    if(strip){ gsap.to(strip, { xPercent: -33.333, duration: 30, ease:'none', repeat:-1 }); }
+  }
+
+  document.getElementById('ctaBtn').addEventListener('click', function(e){
+    e.preventDefault();
+    this.textContent = 'Ссылка появится здесь';
+  });
+})();
+</script>
+</body>
+</html>
